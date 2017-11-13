@@ -13,6 +13,7 @@
         <module>wee-biz</module>
         <module>wee-dao</module>
         <module>wee-server</module>
+        <module>wee-controller</module>
     </modules>
 
     <parent>

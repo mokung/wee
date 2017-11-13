@@ -1,18 +1,16 @@
-package me.wenkang.wee.api.test;
+package me.wenkang.wee.controller.test;
 
 import me.wenkang.wee.api.common.struct.ResponseData;
 import me.wenkang.wee.api.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by wenkang
- * on 2017/9/2.
+ * on 2017/11/13.
  */
-
-@Controller
+@RestController
 @RequestMapping(value = "/test")
 public class TestController {
 
@@ -20,9 +18,8 @@ public class TestController {
     private UserService userService;
 
     @RequestMapping(value = "/test")
-    @ResponseBody
-    public ResponseData test(){
-        return userService.getUserById(1L);
+    public ResponseData test(Long id){
+        return userService.getUserById(id);
     }
 
 }
