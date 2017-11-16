@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
     <!--<include resource="org/springframework/boot/logging/logback/base.xml"/>-->
-    <property name="ENCODER" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n" />
+    <property name="ENCODER" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{50}) - %msg%n" />
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <!--
         日志输出格式：%d表示日期时间，%thread表示线程名，%-5level：级别从左显示5个字符宽度

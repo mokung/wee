@@ -1,6 +1,7 @@
 package me.wenkang.wee.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
+import com.zaxxer.hikari.HikariDataSource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import javax.sql.DataSource;
  * on 2017/9/30.
  */
 @SpringBootConfiguration
+@Slf4j
 public class DBConfig {
 
     @Value("${spring.datasource.url}")
@@ -41,22 +43,26 @@ public class DBConfig {
     @Value("${spring.datasource.maxLifetime}")
     private int maxLifetime;
 
+    @Value("${spring.datasource.connectionInitSql}")
+    private String connectionInitSql;
+
     @Bean(destroyMethod = "close")
     public DataSource dataSource() {
 
-        DruidDataSource datasource = new DruidDataSource();
+        HikariDataSource datasource= new HikariDataSource();
 
         datasource.setDriverClassName(driverClassName);
-        datasource.setUrl(dbUrl);
+        datasource.setJdbcUrl(dbUrl);
         datasource.setUsername(username);
         datasource.setPassword(password);
 
-        datasource.setTimeBetweenConnectErrorMillis(connectionTimeout);
-        datasource.setMaxWait(maxLifetime);
-        datasource.setValidationQuery(validationQuery);
-        datasource.setMinIdle(minIdle);
-        datasource.setMaxActive(maxActive);
-        datasource.setName("dataPool");
+        datasource.setConnectionInitSql(connectionInitSql);
+        datasource.setConnectionTimeout(connectionTimeout);
+        datasource.setMaxLifetime(maxLifetime);
+        datasource.setConnectionTestQuery(validationQuery);
+        datasource.setMinimumIdle(minIdle);
+        datasource.setMaximumPoolSize(maxActive);
+        datasource.setPoolName("dataPool");
         return datasource;
     }
 }

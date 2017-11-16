@@ -1,6 +1,7 @@
 package me.wenkang.wee.api.service.user;
 
 import me.wenkang.wee.api.common.struct.ResponseData;
+import me.wenkang.wee.api.common.struct.entity.user.UserVo;
 
 /**
  * Created by wenkang
@@ -9,4 +10,26 @@ import me.wenkang.wee.api.common.struct.ResponseData;
 public interface UserService {
 
     ResponseData getUserById(Long id);
+
+    /**
+     * 注册
+     * @param userVo
+     * @return
+     */
+    ResponseData register(UserVo userVo);
+
+    /**
+     * 登录
+     * @param userVo
+     * @return
+     */
+    ResponseData login(UserVo userVo);
+
+
+    /**
+     * 登出
+     * @param token
+     * @return
+     */
+    ResponseData logout(String token);
 }

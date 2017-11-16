@@ -17,24 +17,24 @@
         </javaTypeResolver>
 
         <!--生成model相关-->
-        <javaModelGenerator targetPackage="me.wenkang.wee.api.entity"
-                            targetProject="/Users/admin/Documents/javaproject/wee/wee-api/src/main/java">
+        <javaModelGenerator targetPackage="me.wenkang.wee.dao.struct.entity.tag"
+                            targetProject="/Users/admin/Documents/javaproject/wee/wee-dao/src/main/java">
             <property name="enableSubPackages" value="true" />
         </javaModelGenerator>
 
         <!--生成mapper.xml相关-->
-        <sqlMapGenerator targetPackage="mapper"
+        <sqlMapGenerator targetPackage="mapper.tag"
                          targetProject="/Users/admin/Documents/javaproject/wee/wee-dao/src/main/resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <!--生成mapper相关-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="me.wenkang.wee.dao"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="me.wenkang.wee.dao.tag"
                              targetProject="/Users/admin/Documents/javaproject/wee/wee-dao/src/main/java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="t_" domainObjectName="" enableCountByExample="false"
+        <table tableName="t_tag_article" domainObjectName="TagArticle" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false"/>
 

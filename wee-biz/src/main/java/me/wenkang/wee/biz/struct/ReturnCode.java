@@ -9,6 +9,9 @@ import me.wenkang.wee.api.common.struct.IReturnCode;
 public enum  ReturnCode implements IReturnCode {
 
     SUCCESS("000000", "成功"),
+    SYS_EXCEPTION("999999", "系统异常"),
+    USERNAME_OR_PASSWD_ERROR("000001", "用户名或密码错误"),
+    USERNAME_EXISTS("000002", "用户名已存在"),
 
     ;
 
