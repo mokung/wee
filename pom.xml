@@ -14,6 +14,7 @@
         <module>wee-dao</module>
         <module>wee-server</module>
         <module>wee-controller</module>
+        <module>wee-components</module>
     </modules>
 
     <parent>

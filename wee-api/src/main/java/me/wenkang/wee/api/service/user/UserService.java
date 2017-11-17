@@ -1,6 +1,7 @@
 package me.wenkang.wee.api.service.user;
 
 import me.wenkang.wee.api.common.struct.ResponseData;
+import me.wenkang.wee.api.common.struct.entity.user.UserQuery;
 import me.wenkang.wee.api.common.struct.entity.user.UserVo;
 
 /**
@@ -32,4 +33,10 @@ public interface UserService {
      * @return
      */
     ResponseData logout(String token);
+    /**
+     * 分页查询
+     * @param query
+     * @return
+     */
+    ResponseData query(UserQuery query);
 }

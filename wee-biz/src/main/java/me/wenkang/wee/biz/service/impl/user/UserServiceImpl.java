@@ -1,13 +1,15 @@
-package me.wenkang.wee.biz.user;
+package me.wenkang.wee.biz.service.impl.user;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import me.wenkang.wee.api.common.struct.ResponseData;
+import me.wenkang.wee.api.common.struct.entity.user.UserQuery;
 import me.wenkang.wee.api.common.struct.entity.user.UserVo;
 import me.wenkang.wee.api.service.user.UserService;
 import me.wenkang.wee.biz.struct.ReturnCode;
 import me.wenkang.wee.biz.utils.MD5Util;
 import me.wenkang.wee.biz.utils.RedisUtils;
+import me.wenkang.wee.components.constant.page.Page;
 import me.wenkang.wee.dao.struct.entity.user.User;
 import me.wenkang.wee.dao.user.UserMapper;
 import org.apache.commons.lang3.RandomUtils;
@@ -18,6 +20,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by wenkang
@@ -69,9 +72,9 @@ public class UserServiceImpl implements UserService {
         String password = MD5Util.encrypt(userVo.getPassword());
         User user = userMapper.getByUserName(userVo.getUserName());
         if (user == null || user.getIsDelete() == 1 || !user.getPassword().equals(password)) {
-            return new ResponseData(ReturnCode.USERNAME_OR_PASSWD_ERROR);
+            return new ResponseData(ReturnCode.USERNAME_OR_PASSWORD_ERROR);
         }
-        String token = (Long.toHexString(System.currentTimeMillis()) + Long.toHexString(user.getId()) + Long
+        String token = (Long.toHexString(System.currentTimeMillis()+user.getId()) + Long.toHexString(user.getId()) + Long
                 .toHexString(user.getId() * RandomUtils.nextInt(1, 9) + RandomUtils.nextInt(10, 99999))).toUpperCase();
 
         RedisUtils.accept(jedis -> jedis.set(token, JSONObject.toJSONString(user)));
@@ -87,5 +90,14 @@ public class UserServiceImpl implements UserService {
     public ResponseData logout(String token) {
         RedisUtils.accept(jedis -> jedis.del(token));
         return new ResponseData(ReturnCode.SUCCESS);
+    }
+
+    @Override
+    public ResponseData query(UserQuery query) {
+        Page<User> pg = new Page<>(query);
+        List<User> queryPage = userMapper.findPage(query);
+        pg.setData(queryPage);
+        pg.setTotal(query.getTotal());
+        return new ResponseData(ReturnCode.SUCCESS,pg);
     }
 }

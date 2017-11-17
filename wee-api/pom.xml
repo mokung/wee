@@ -13,6 +13,11 @@
     <packaging>jar</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>me.wenkang</groupId>
+            <artifactId>wee-components</artifactId>
+            <version>${wee.version}</version>
+        </dependency>
         <!-- tools -->
         <dependency>
             <groupId>org.projectlombok</groupId>

@@ -192,4 +192,17 @@
     from t_user
     where user_name = #{userName}
   </select>
+
+  <select id="findPage" resultMap="BaseResultMap" parameterType="me.wenkang.wee.api.common.struct.entity.user.UserQuery">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    where 1=1
+    <if test="userName != null and userName!=''">
+      and instr(user_name, #{userName})
+    </if>
+    <if test="nickName != null and nickName!=''">
+      and instr(nick_name, #{nickName})
+    </if>
+  </select>
 </mapper>

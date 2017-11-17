@@ -1,5 +1,7 @@
 package me.wenkang.wee.config;
 
+import me.wenkang.wee.components.page.PageInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -27,6 +29,9 @@ public class MybatisConfig implements TransactionManagementConfigurer {
     private static final String MYBATIS_MAPPER_LOCATIONS = "classpath*:mapper/**/*.xml";
 
     @Autowired
+    private PageInterceptor pageInterceptor;
+
+    @Autowired
     private DataSource dataSource;
 
     @Bean("sqlSessionFactory")
@@ -35,6 +40,7 @@ public class MybatisConfig implements TransactionManagementConfigurer {
         PathMatchingResourcePatternResolver pathMatchingResourcePatternResolver = new PathMatchingResourcePatternResolver();
         sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setTypeAliasesPackage("");
+        sqlSessionFactoryBean.setPlugins(new Interceptor[]{pageInterceptor});
         sqlSessionFactoryBean.setMapperLocations(pathMatchingResourcePatternResolver.getResources(MYBATIS_MAPPER_LOCATIONS));
         return sqlSessionFactoryBean.getObject();
     }

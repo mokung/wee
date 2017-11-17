@@ -18,6 +18,11 @@
             <artifactId>wee-api</artifactId>
             <version>${wee.version}</version>
         </dependency>
+        <dependency>
+            <groupId>me.wenkang</groupId>
+            <artifactId>wee-components</artifactId>
+            <version>${wee.version}</version>
+        </dependency>
         <!-- mysql -->
         <dependency>
             <groupId>mysql</groupId>

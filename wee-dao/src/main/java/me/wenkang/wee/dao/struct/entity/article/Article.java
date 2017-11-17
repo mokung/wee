@@ -2,6 +2,7 @@ package me.wenkang.wee.dao.struct.entity.article;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
